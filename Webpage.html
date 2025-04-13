@@ -1,0 +1,122 @@
+Webpage
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Webpage</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+    .error {
+      color: red;
+      font-size: 0.9em;
+      margin-top: -10px;
+      margin-bottom: 10px;
+    }
+    .button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .button:hover {
+      background-color: #0056b3;
+    }
+    .interactive-area {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Interactive Webpage</h2>
+    <form id="demoForm">
+      <label for="name">Name:</label><br>
+      <input type="text" id="name" name="name" required><br>
+      <div class="error" id="nameError"></div>
+
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" name="email" required><br>
+      <div class="error" id="emailError"></div>
+
+      <button type="submit" class="button">Submit</button>
+    </form>
+
+    <div class="interactive-area">
+      <button class="button" id="colorButton">Change Background Color</button>
+      <button class="button" id="showAlertButton">Show Alert</button>
+    </div>
+  </div>
+
+  <script>
+    // Form validation
+    const form = document.getElementById('demoForm');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const nameError = document.getElementById('nameError');
+    const emailError = document.getElementById('emailError');
+
+    form.addEventListener('submit', (e) => {
+      let valid = true;
+
+      // Name validation
+      if (nameInput.value.trim() === '') {
+        valid = false;
+        nameError.textContent = 'Name is required.';
+      } else {
+        nameError.textContent = '';
+      }
+
+      // Email validation
+      if (emailInput.value.trim() === '') {
+        valid = false;
+        emailError.textContent = 'Email is required.';
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+        valid = false;
+        emailError.textContent = 'Enter a valid email address.';
+      } else {
+        emailError.textContent = '';
+      }
+
+      if (!valid) {
+        e.preventDefault();
+      }
+    });
+
+    // Interactive elements
+    const colorButton = document.getElementById('colorButton');
+    const showAlertButton = document.getElementById('showAlertButton');
+
+    colorButton.addEventListener('click', () => {
+      document.body.style.backgroundColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+    });
+
+    showAlertButton.addEventListener('click', () => {
+      alert('Hello! This is your interactive alert.');
+    });
+  </script>
+</body>
+</html>
